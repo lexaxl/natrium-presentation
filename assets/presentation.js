@@ -36,6 +36,12 @@
       setTimeout(function () { if (cta) cta.click(); }, smooth === 'smooth' ? 500 : 0);
     },
     inline: function (d) { reveal(d, '#lead-form', 64); },
+    // Нажатие на пустой встроенной форме: ошибки под полями, как их увидит человек.
+    errors: function (d) {
+      reveal(d, '#lead-form', 64);
+      var submit = d.querySelector('#lead-form .lead-form__submit');
+      setTimeout(function () { if (submit) submit.click(); }, smooth === 'smooth' ? 500 : 0);
+    },
     footer: function (d) { reveal(d, '[data-footer]', 0); },
     policy: null
   };
