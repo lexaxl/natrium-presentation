@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Натриум — форма заявки: покой, ошибки, отправка, успех</title>
+<style>
+/* Governed by: DESIGN.md — Colors, Typography, Components (input, textarea-comment,
+   checkbox-consent, modal-form, button-primary)
+   EXPERIENCE.md — State Patterns (все строки), Component Patterns (Модалка формы,
+   Поле ввода, Поле «Комментарий», Чекбокс согласия), Voice and Tone (канонические строки),
+   Accessibility Floor, Контекст заявки
+   Шрифты: реальная страница — Oswald 600 / Roboto 400 из Google Fonts; здесь системные
+   фолбэки, мок рендерится без сети.
+   Правки после валидации: чекбокс стал настоящим элементом управления с меткой; добавлено
+   поле «Комментарий» из form-contract.md; заливка accent-fill #E3103F; границы полей
+   border-control #949094 (3.15:1, порог 1.4.11); legal поднят с 13px до 14px; добавлены
+   autocomplete, aria-label, role=dialog, aria-live; состояние «согласие снято»;
+   состояние отправки больше не гасит кнопку цветом #F4A0B4 (1.99:1). */
+:root{
+  --surface-base:#FFFFFF; --surface-muted:#F7F5F5; --ink-primary:#231F20; --ink-secondary:#5A5356;
+  --ink-inverse:#FFFFFF; --accent-fill:#E3103F; --accent-pressed:#C4103A; --accent-text:#C4103A;
+  --hairline:#E8E4E5; --border-control:#949094; --error:#B80E34; --success:#1F7A3D;
+  --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#3A3A3C;font-family:Roboto,Arial,sans-serif;padding:32px 16px;display:flex;gap:24px;flex-wrap:wrap;justify-content:center;color:#fff}
+.case{width:320px}
+.case h4{font:500 13px/1.4 Roboto,Arial,sans-serif;color:#C8C6C4;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.phone{width:320px;min-height:600px;position:relative;overflow:hidden;border-radius:4px;background:var(--surface-base)}
+.behind{padding:var(--s4);filter:blur(1px)}
+.behind h2{font:600 24px/28px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;color:var(--ink-primary)}
+.behind .pc{margin-top:var(--s3);border:1px solid var(--hairline);border-radius:8px;padding:var(--s5)}
+.scrim{position:absolute;inset:0;background:rgba(35,31,32,.6)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface-base);border-radius:8px 8px 0 0;
+  padding:var(--s5) var(--s4) var(--s4);box-shadow:0 -4px 16px rgba(35,31,32,.16)}
+.close{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;font-size:20px;color:var(--ink-secondary);cursor:pointer}
+h2.title{font:600 24px/28px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;color:var(--ink-primary)}
+.lead{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary);margin-top:var(--s2)}
+label{display:block;font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary);margin:var(--s4) 0 4px}
+input[type=text],input[type=tel],textarea{width:100%;min-height:56px;border:1px solid var(--border-control);border-radius:4px;padding:var(--s3);
+  font:400 16px/24px Roboto,Arial,sans-serif;color:var(--ink-primary);background:var(--surface-base)}
+textarea{min-height:88px;resize:vertical}
+::placeholder{color:var(--ink-secondary);opacity:1}
+.focus{outline:2px solid var(--ink-primary);outline-offset:2px}
+.bad{border-color:var(--error)}
+.hint{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary);margin-top:4px}
+.err{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--error);margin-top:4px}
+.consent{display:flex;gap:var(--s3);margin-top:var(--s4);align-items:flex-start;min-height:44px}
+.consent input{flex:0 0 24px;width:24px;height:24px;margin-top:2px;accent-color:var(--accent-fill)}
+.consent label{margin:0;font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary)}
+.consent a{color:var(--accent-text)}
+.cta{display:block;width:100%;min-height:56px;background:var(--accent-fill);color:var(--ink-inverse);border:0;border-radius:8px;
+  font:600 20px/24px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin-top:var(--s5);cursor:pointer;padding:var(--s3)}
+.ok{text-align:center;padding:var(--s5) 0 var(--s2)}
+.ok .mark{width:56px;height:56px;border-radius:9999px;background:var(--success);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto var(--s4)}
+.ok p{font:400 16px/24px Roboto,Arial,sans-serif;color:var(--ink-primary);margin-top:var(--s2)}
+.ok .sec{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary)}
+.ghost{display:block;width:100%;min-height:56px;background:none;color:var(--ink-primary);border:1px solid var(--ink-primary);border-radius:8px;
+  font:600 20px/24px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;margin-top:var(--s5);cursor:pointer}
+.kbd{position:absolute;left:0;right:0;bottom:0;height:180px;background:#D3D1D4;border-top:1px solid #B9B7BA;
+  font:400 12px/180px Roboto,Arial,sans-serif;color:#6B6367;text-align:center}
+.legend{width:100%;max-width:1000px;font:400 13px/20px Roboto,Arial,sans-serif;color:#C8C6C4}
+.legend b{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="case">
+  <h4>Покой · открыта из карточки тарифа</h4>
+  <div class="phone">
+    <div class="behind"><h2>Цены</h2><div class="pc">Разовое · 1 200 ₽</div></div>
+    <div class="scrim"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="t1">
+      <button class="close" aria-label="Закрыть форму">✕</button>
+      <h2 class="title" id="t1">Оставь заявку</h2>
+      <p class="lead">Перезвоним в течение 15 минут и подберём, с чего начать.</p>
+      <label for="n1">Имя</label>
+      <input type="text" id="n1" autocomplete="name" placeholder="Как тебя зовут">
+      <label for="p1">Телефон</label>
+      <input type="tel" id="p1" autocomplete="tel" inputmode="numeric" placeholder="+7 (___) ___-__-__">
+      <p class="hint">Формат: +7 (999) 123-45-67</p>
+      <label for="c1">Комментарий (необязательно)</label>
+      <textarea id="c1" placeholder="Что хочешь спросить"></textarea>
+      <div class="consent">
+        <input type="checkbox" id="g1" checked>
+        <label for="g1">Вы согласны на обработку персональных данных и принимаете <a href="#" target="_blank" rel="noopener">политику конфиденциальности</a></label>
+      </div>
+      <button class="cta">Записаться</button>
+    </div>
+  </div>
+</div>
+
+<div class="case">
+  <h4>Ошибки · телефон неполон, согласие снято</h4>
+  <div class="phone">
+    <div class="scrim"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="t2" style="bottom:180px">
+      <button class="close" aria-label="Закрыть форму">✕</button>
+      <h2 class="title" id="t2">Оставь заявку</h2>
+      <label for="n2">Имя</label>
+      <input type="text" id="n2" autocomplete="name" value="Игорь">
+      <label for="p2">Телефон</label>
+      <input type="tel" id="p2" class="bad focus" autocomplete="tel" inputmode="numeric" value="+7 (916) 240-1" aria-describedby="e2" aria-invalid="true">
+      <p class="err" id="e2">Введи номер полностью</p>
+      <div class="consent">
+        <input type="checkbox" id="g2" aria-describedby="e3">
+        <label for="g2">Вы согласны на обработку персональных данных и принимаете <a href="#" target="_blank" rel="noopener">политику конфиденциальности</a></label>
+      </div>
+      <p class="err" id="e3">Без согласия на обработку данных мы не сможем перезвонить</p>
+      <button class="cta">Записаться</button>
+    </div>
+    <div class="kbd">системная числовая клавиатура</div>
+  </div>
+</div>
+
+<div class="case">
+  <h4>Отправка · кнопка занята, но не погашена</h4>
+  <div class="phone">
+    <div class="scrim"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="t3">
+      <button class="close" aria-label="Закрыть форму">✕</button>
+      <h2 class="title" id="t3">Оставь заявку</h2>
+      <label for="n3">Имя</label>
+      <input type="text" id="n3" value="Игорь" readonly>
+      <label for="p3">Телефон</label>
+      <input type="tel" id="p3" value="+7 (916) 240-18-77" readonly>
+      <button class="cta" aria-busy="true">Отправляем…</button>
+      <p class="hint" role="status">Отправляем заявку</p>
+    </div>
+  </div>
+</div>
+
+<div class="case">
+  <h4>Успех · фокус на заголовке, окно не закрывается само</h4>
+  <div class="phone">
+    <div class="scrim"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="t4">
+      <div class="ok">
+        <div class="mark" aria-hidden="true">✓</div>
+        <h2 class="title focus" id="t4" tabindex="-1">Заявка принята</h2>
+        <p role="status">Перезвоним в течение 15 минут.</p>
+        <p class="sec">Если удобнее сейчас — <a href="tel:+74956460765" style="color:var(--accent-text)">+7 (495) 646-07-65</a></p>
+      </div>
+      <button class="ghost">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<p class="legend"><b>Что проверяет мок.</b> Четыре строки таблицы состояний: покой, ошибки, отправка, успех. Чекбокс — настоящий <code>input</code> с <code>label</code>, нажимается по всей строке, ошибка согласия стоит у чекбокса, а не у полей. Поле «Комментарий» из контракта на месте и отправку не блокирует. Формат телефона подписан постоянно, а не только плейсхолдером. Кнопка активна с самого начала — мёртвая кнопка не объясняет причину; в состоянии отправки она не гасится, а помечается занятой, иначе подпись перестаёт читаться и фокус выпадает из порядка обхода. На успехе фокус переводится на заголовок. Границы полей — <code>border-control</code> 3.15:1 вместо декоративного <code>hairline</code> 1.26:1. Спины побеждают при любом расхождении с этим моком.</p>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Натриум — лендинг для заявок с Яндекс Карт</title>
+<link rel="icon" type="image/svg+xml" href="prototype/favicon.svg">
+<link rel="stylesheet" href="assets/presentation.css">
+</head>
+<body>
+
+<nav class="topbar" aria-label="Разделы презентации">
+  <a class="topbar__brand" href="#start"><img src="assets/logo.svg" alt="Натриум" width="56" height="28"></a>
+  <ul class="topbar__links">
+    <li><a href="#task">Задача</a></li>
+    <li><a href="#prototype">Прототип</a></li>
+    <li><a href="#features">Функции</a></li>
+    <li><a href="#architecture">Архитектура</a></li>
+    <li><a href="#limits">Ограничения</a></li>
+    <li><a href="#next">Дальше</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section class="slide slide--title" id="start" aria-labelledby="title">
+  <div class="wrap">
+    <h1 id="title" class="display">Лендинг, который превращает переход с&nbsp;Яндекс Карт в&nbsp;звонок администратора</h1>
+    <p class="lead">Одностраничный сайт кроссфит-бокса «Натриум» на Дубининской. Человек со смартфона оставляет имя и телефон, не уходя со страницы, а клуб знает, откуда пришла каждая заявка.</p>
+    <dl class="facts">
+      <div><dt>Состояние на</dt><dd>16 сентября 2026</dd></div>
+      <div><dt>Готово историй</dt><dd>11 из 24</dd></div>
+      <div><dt>Вес страницы</dt><dd>272 КБ из 2 МБ</dd></div>
+    </dl>
+    <p class="actions">
+      <a class="btn btn--primary" href="#prototype">Посмотреть прототип</a>
+      <a class="btn btn--ghost" href="prototype/" target="_blank" rel="noopener">Открыть сайт на весь экран</a>
+    </p>
+  </div>
+</section>
+
+<section class="slide" id="task" aria-labelledby="task-title">
+  <div class="wrap">
+    <h2 id="task-title" class="h1">Что было не так и что меняем</h2>
+    <div class="two-col">
+      <div>
+        <h3>Сейчас</h3>
+        <p>Клуб получает тёплый трафик с Яндекс Карт — 90% открытий со смартфона. Человека уводят на внешний виджет расписания, где он теряется, а источник перехода обрывается. Какой канал приносит клиентов, не видно, и рекламным бюджетом нечем управлять.</p>
+      </div>
+      <div class="solution">
+        <h3>После запуска</h3>
+        <p>Человек открывает сайт с карты, видит адрес, зал, цены и тренеров и оставляет имя и телефон прямо на странице. Администратор получает заявку письмом и в Telegram — с источником перехода и выбранным тарифом. В Метрике растёт цель, разбитая по источникам.</p>
+      </div>
+    </div>
+    <h3 class="flow-title">Как проверим, что работает</h3>
+    <ol class="flow">
+      <li>Переход по ссылке с метками</li>
+      <li>Отправка формы с телефона</li>
+      <li>Запись в журнале заявок</li>
+      <li>Сообщение в Telegram с теми же метками</li>
+      <li>Цель в Метрике по ответу сервера</li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide slide--muted" id="prototype" aria-labelledby="proto-title">
+  <div class="wrap proto">
+    <div class="proto__text">
+      <h2 id="proto-title" class="h1">Кликабельный прототип</h2>
+      <p>В телефоне — настоящий собранный сайт, а не картинка. Нажимайте кнопки прямо в нём или выберите сценарий:</p>
+      <ul class="scenarios" role="list">
+        <li><button type="button" data-scenario="top">Первый экран: адрес, слоган, призыв</button></li>
+        <li><button type="button" data-scenario="gallery">Галерея зала листается свайпом</button></li>
+        <li><button type="button" data-scenario="pricing">Цены с кнопкой в каждом тарифе</button></li>
+        <li><button type="button" data-scenario="form">Форма заявки выезжает снизу</button></li>
+        <li><button type="button" data-scenario="inline">Форма в конце страницы</button></li>
+        <li><button type="button" data-scenario="footer">Подвал: телефон, реквизиты, карта</button></li>
+        <li><button type="button" data-scenario="policy">Политика конфиденциальности</button></li>
+      </ul>
+      <p class="note"><strong>Прототип на заглушках.</strong> Фото, тарифы, тренеры и реквизиты подставятся из одного файла, когда клуб их пришлёт. Кнопка «Записаться» в форме пока ничего не отправляет: отправка — следующий этап.</p>
+      <p class="note">Макеты, по которым собирался сайт: <a href="mockups/key-hero.html" target="_blank" rel="noopener">первый экран и шапка</a>, <a href="mockups/key-form.html" target="_blank" rel="noopener">все состояния формы</a> — включая ошибки и экран «Заявка принята», которые ещё впереди.</p>
+    </div>
+    <div class="proto__device">
+      <div class="phone">
+        <iframe id="phone-frame" src="prototype/" title="Прототип сайта «Натриум» в телефоне" width="375" height="720"></iframe>
+      </div>
+      <a class="btn btn--ghost proto__open" href="prototype/" target="_blank" rel="noopener">Открыть прототип на весь экран</a>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <h2 id="features-title" class="h1">Что заложено</h2>
+    <p class="lead">Возможности из технического задания и правок к нему. Статус — на 16 сентября.</p>
+    <div class="table-scroll">
+    <table class="features">
+      <thead><tr><th scope="col">Возможность</th><th scope="col">Как устроено</th><th scope="col">Статус</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Позвонить одним нажатием</th><td>Номер ссылкой в шапке и в подвале, в подвале — полным текстом</td><td><span class="status status--done">работает</span></td></tr>
+        <tr><th scope="row">Призыв под рукой на всей странице</th><td>Шапка прилипает, когда первый экран ушёл вверх, и приносит кнопку «Записаться»</td><td><span class="status status--done">работает</span></td></tr>
+        <tr><th scope="row">Атмосфера зала</th><td>Галерея листается свайпом, клавиатурой и колесом; фото грузятся по мере прокрутки</td><td><span class="status status--done">работает</span></td></tr>
+        <tr><th scope="row">Где клуб и как доехать</th><td>Адрес на первом экране; карта в подвале включается нажатием и не перехватывает прокрутку</td><td><span class="status status--done">работает</span></td></tr>
+        <tr><th scope="row">Контент без вёрстки</th><td>Тексты, цены, тренеры и реквизиты — в одном файле; сборка не пропустит заглушки в публикацию</td><td><span class="status status--done">работает</span></td></tr>
+        <tr><th scope="row">Политика конфиденциальности</th><td>Отдельная страница; срок хранения заявок в тексте совпадает с настройкой журнала</td><td><span class="status status--part">черновик</span></td></tr>
+        <tr><th scope="row">Заявка, не уходя со страницы</th><td>Форма выезжает снизу по любой кнопке и стоит в конце страницы; введённое не теряется при закрытии. Маска телефона, проверка и отправка — дальше</td><td><span class="status status--part">открывается</span></td></tr>
+        <tr><th scope="row">Заявка на конкретный тариф</th><td>Кнопка в карточке тарифа открывает форму; название тарифа уедет в заявку</td><td><span class="status status--part">кнопка есть</span></td></tr>
+        <tr><th scope="row">Заявка не теряется</th><td>Сначала запись в журнал, потом уведомления; журнал хранит заявки 6 месяцев</td><td><span class="status status--todo">впереди</span></td></tr>
+        <tr><th scope="row">Администратор узнаёт сразу</th><td>Письмо и сообщение в Telegram-чат с источником перехода и тарифом</td><td><span class="status status--todo">впереди</span></td></tr>
+        <tr><th scope="row">Источник доезжает до заявки</th><td>Метки перехода запоминаются на 30 дней по первому касанию</td><td><span class="status status--todo">впереди</span></td></tr>
+        <tr><th scope="row">Честная аналитика</th><td>Цель в Метрике только по подтверждённой сервером заявке; дашборд заявок для владельца</td><td><span class="status status--todo">впереди</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 class="subhead">Что проверяется при каждой сборке</h3>
+    <ul class="quality" role="list">
+      <li><strong>14 автоматических проверок</strong><span>Сборка падает, если сломан первый экран, форма или подвал, цвета и размеры разошлись с дизайном или страница обращается к посторонним сервисам</span></li>
+      <li><strong>Доступность WCAG 2.1 AA</strong><span>Области нажатия от 44 пикселей, видимый фокус, скринридер, зум 200%</span></li>
+      <li><strong>Лёгкая страница</strong><span>272 КБ на заглушках при бюджете 2 МБ; свои шрифты, никакого фреймворка в браузере</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide slide--inverse" id="architecture" aria-labelledby="arch-title">
+  <div class="wrap">
+    <h2 id="arch-title" class="h1">Архитектура</h2>
+    <p class="lead">Две независимые части: статичная страница и функция приёма заявок. Всё, что видит имя и телефон, работает в Yandex Cloud в России — кроме доставки в Telegram.</p>
+    <div class="diagram-scroll">
+      <svg class="diagram" viewBox="0 0 1040 480" role="img" aria-labelledby="diagram-title diagram-desc">
+        <title id="diagram-title">Схема работы сайта и приёма заявок</title>
+        <desc id="diagram-desc">Телефон посетителя загружает страницу из Object Storage через CDN. Заявка уходит в функцию приёма в Cloud Functions. Функция сначала пишет заявку в журнал YDB, затем отправляет письмо через Postbox и сообщение в Telegram через релей за пределами России. После ответа сервера страница засчитывает цель в Яндекс Метрике. Владелец смотрит заявки в DataLens. GitHub Actions собирает и выкладывает сайт, секреты функции хранятся в Lockbox.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A8A2A4"/></marker>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#FF4D6D"/></marker>
+        </defs>
+
+        <rect x="210" y="20" width="600" height="440" rx="14" class="zone"/>
+        <text x="230" y="50" class="zone-label">Yandex Cloud, Россия</text>
+
+        <rect x="20" y="190" width="150" height="90" rx="10" class="node node--accent"/>
+        <text x="95" y="228" class="t-strong" text-anchor="middle">Телефон</text>
+        <text x="95" y="252" class="t" text-anchor="middle">посетителя</text>
+
+        <rect x="240" y="80" width="220" height="80" rx="10" class="node"/>
+        <text x="350" y="114" class="t-strong" text-anchor="middle">Страница сайта</text>
+        <text x="350" y="138" class="t" text-anchor="middle">Object Storage + CDN</text>
+
+        <rect x="240" y="300" width="220" height="80" rx="10" class="node node--accent"/>
+        <text x="350" y="334" class="t-strong" text-anchor="middle">Функция приёма</text>
+        <text x="350" y="358" class="t" text-anchor="middle">Cloud Functions</text>
+
+        <rect x="550" y="200" width="230" height="80" rx="10" class="node"/>
+        <text x="665" y="234" class="t-strong" text-anchor="middle">1. Журнал заявок</text>
+        <text x="665" y="258" class="t" text-anchor="middle">YDB, хранение 6 месяцев</text>
+
+        <rect x="550" y="340" width="230" height="80" rx="10" class="node"/>
+        <text x="665" y="374" class="t-strong" text-anchor="middle">2. Письмо</text>
+        <text x="665" y="398" class="t" text-anchor="middle">Postbox</text>
+
+        <rect x="550" y="80" width="230" height="80" rx="10" class="node"/>
+        <text x="665" y="114" class="t-strong" text-anchor="middle">Дашборд владельца</text>
+        <text x="665" y="138" class="t" text-anchor="middle">DataLens, только чтение</text>
+
+        <rect x="860" y="340" width="160" height="80" rx="10" class="node node--outside"/>
+        <text x="940" y="374" class="t-strong" text-anchor="middle">2. Telegram</text>
+        <text x="940" y="398" class="t" text-anchor="middle">через релей вне РФ</text>
+
+        <rect x="860" y="190" width="160" height="90" rx="10" class="node node--outside"/>
+        <text x="940" y="228" class="t-strong" text-anchor="middle">Яндекс Метрика</text>
+        <text x="940" y="252" class="t" text-anchor="middle">цель по ответу</text>
+
+        <rect x="20" y="400" width="150" height="50" rx="8" class="node node--small"/>
+        <text x="95" y="431" class="t" text-anchor="middle">GitHub Actions</text>
+        <rect x="240" y="410" width="120" height="40" rx="8" class="node node--small"/>
+        <text x="300" y="436" class="t" text-anchor="middle">Lockbox</text>
+
+        <path d="M170 215 C 205 190, 205 120, 238 120" class="edge" marker-end="url(#arrow)"/>
+        <text x="112" y="160" class="t-small">открытие</text>
+        <path d="M170 255 C 205 280, 205 340, 238 340" class="edge edge--red" marker-end="url(#arrow-red)"/>
+        <text x="120" y="312" class="t-small t-red">заявка</text>
+        <path d="M460 330 C 505 330, 505 240, 548 240" class="edge edge--red" marker-end="url(#arrow-red)"/>
+        <path d="M460 355 C 505 355, 505 380, 548 380" class="edge" marker-end="url(#arrow)"/>
+        <path d="M780 380 L 858 380" class="edge" marker-end="url(#arrow)"/>
+        <path d="M665 198 L 665 162" class="edge edge--dashed" marker-end="url(#arrow)"/>
+        <path d="M60 190 L 60 8 L 940 8 L 940 188" class="edge edge--dashed" marker-end="url(#arrow)"/>
+        <path d="M170 425 C 222 425, 222 180, 238 152" class="edge edge--dashed" marker-end="url(#arrow)"/>
+        <path d="M300 410 L 300 382" class="edge edge--dashed" marker-end="url(#arrow)"/>
+      </svg>
+    </div>
+    <ul class="principles" role="list">
+      <li><strong>Сначала журнал, потом уведомления.</strong> Если почта или Telegram недоступны, заявка всё равно сохранена, а человек видит подтверждение.</li>
+      <li><strong>Цель в Метрике — только по ответу сервера.</strong> В отчётах нет нажатий на кнопку, за которыми не стоит заявка.</li>
+      <li><strong>Источник живёт 30 дней.</strong> Человек, вернувшийся через неделю напрямую, всё равно приписан каналу, с которого пришёл впервые.</li>
+      <li><strong>Сроки обеспечивает хранилище.</strong> Заявки удаляются автоматически через 6 месяцев — тот же срок назван в политике.</li>
+      <li><strong>Каналы заменяются по одному.</strong> Почта и Telegram подключены через адаптеры: смена сервиса не трогает логику заявки.</li>
+      <li><strong>Никаких посторонних обращений.</strong> Страница ходит только в Метрику, к карте после нажатия и в свою функцию приёма — это проверяется при сборке.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" id="limits" aria-labelledby="limits-title">
+  <div class="wrap">
+    <h2 id="limits-title" class="h1">Ограничения и решения</h2>
+    <div class="limits">
+      <div>
+        <h3>Сознательно не делаем</h3>
+        <ul>
+          <li>Онлайн-запись в расписание и переход на внешние виджеты вроде booknow.ru</li>
+          <li>Оплату абонементов и личный кабинет</li>
+          <li>Интеграцию с CRM и админку — контент правится в одном файле данных</li>
+          <li>Отдельную раскладку для компьютера — страница остаётся колонкой до 480 пикселей</li>
+          <li>Страницы сверх пяти блоков ТЗ, кроме политики конфиденциальности</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Отличия от ТЗ</h3>
+        <ul>
+          <li><strong>Журнал в YDB, а не в Яндекс Таблицах.</strong> У Таблиц нет программной записи; заявки владелец смотрит в дашборде DataLens.</li>
+          <li><strong>Telegram через релей вне России.</strong> С весны 2026 года api.telegram.org недоступен с российских хостингов. Это единственное место, где данные заявки покидают РФ.</li>
+          <li><strong>Карта в подвале включается нажатием.</strong> Встроенная сразу, она перехватывает прокрутку пальцем и утяжеляет страницу.</li>
+          <li><strong>Сайт на поддомене go.natriumcrossfit.ru.</strong> Действующий сайт на основном домене не трогается.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Риски, принятые владельцем</h3>
+        <ul>
+          <li><strong>Согласие на обработку данных отмечено заранее</strong> и стоит в одной фразе с принятием политики. По 152-ФЗ это спорно — нужен взгляд юриста клуба.</li>
+          <li><strong>Уведомление в Telegram — трансграничная передача</strong> имени и телефона; политика называет это прямо.</li>
+        </ul>
+        <h3>Пока не готово</h3>
+        <ul>
+          <li>Контент — заглушки; индексация закрыта, пока клуб не пришлёт настоящий</li>
+          <li>Форма открывается, но не отправляет</li>
+          <li>Текст политики — черновик, клубом не согласован</li>
+          <li>Клавиатура на iPhone и кнопка «назад» на Android проверены только в эмуляции</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide--muted" id="next" aria-labelledby="next-title">
+  <div class="wrap">
+    <h2 id="next-title" class="h1">Где мы и что дальше</h2>
+    <ol class="epics">
+      <li>
+        <div class="epic__head"><h3>Клуб выглядит настоящим, и до него можно дойти</h3><span class="epic__count">9 из 10</span></div>
+        <div class="bar" role="img" aria-label="Готово 9 историй из 10"><span style="width: 90%"></span></div>
+        <p>Страница целиком: первый экран, шапка, галерея, цены, тренеры, подвал с картой, выкатка. Осталась подстановка настоящего контента.</p>
+      </li>
+      <li>
+        <div class="epic__head"><h3>Заявка доходит до администратора и не теряется</h3><span class="epic__count">2 из 11</span></div>
+        <div class="bar" role="img" aria-label="Готово 2 истории из 11"><span style="width: 18%"></span></div>
+        <p>Готовы политика и открытие формы. Дальше маска телефона, проверка полей, отправка с журналом, метки и тариф, защита от ботов и повторов, письмо и Telegram, проверка доступности.</p>
+      </li>
+      <li>
+        <div class="epic__head"><h3>Владелец судит об источниках по достоверным данным</h3><span class="epic__count">0 из 3</span></div>
+        <div class="bar" role="img" aria-label="Готово 0 историй из 3"><span style="width: 0%"></span></div>
+        <p>Цель в Метрике по реальной заявке, дашборд заявок, сквозная проверка на живом сайте.</p>
+      </li>
+    </ol>
+    <h3 class="subhead">Что нужно от клуба</h3>
+    <div class="asks">
+      <ul>
+        <li><strong>Контент:</strong> адрес и телефон, тарифы с ценами и составом, 5–10 фото зала исходниками, тренеры с фото и регалиями, часы работы.</li>
+        <li><strong>Юридическое:</strong> наименование, ИНН, ОГРН, юридический адрес; текст политики, согласованный с юристом.</li>
+      </ul>
+      <ul>
+        <li><strong>Каналы уведомлений:</strong> почтовый ящик администратора, Telegram-бот и чат администраторов.</li>
+        <li><strong>Облако:</strong> аккаунт Yandex Cloud и запись поддомена у регистратора — по готовой инструкции.</li>
+        <li><strong>Обещание звонка:</strong> на сайте написано «перезвоним в течение 15 минут» — администратор должен это выполнять.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="assets/presentation.js"></script>
+</body>
+</html>

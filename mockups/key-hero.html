@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Натриум — первый экран (320×568)</title>
+<style>
+/* Governed by: DESIGN.md — Brand & Style, Colors, Typography, Layout & Spacing,
+   Components (button-primary, button-compact, sticky-header, gallery)
+   EXPERIENCE.md — Information Architecture, Component Patterns (Кнопка CTA, Липкая шапка,
+   Телефонная ссылка, Галерея), Key Flows поток 1 шаги 1-3
+   Шрифты: на реальной странице Oswald 600 / Roboto 400 из Google Fonts. Здесь системные
+   фолбэки из токенов, потому что мок обязан рендериться без сети.
+   Правки после валидации: заливка кнопок accent-fill #E3103F (4.76:1 с белым) вместо
+   логотипного #EE1D48 (4.28:1); кнопка в шапке 44px/16px вместо 40px/15px; границы
+   элементов управления и точки галереи — border-control #949094; иконкам добавлены
+   доступные имена; карточка галереи 240×172 по исправленному токену. */
+:root{
+  --surface-base:#FFFFFF; --surface-muted:#F7F5F5; --surface-inverse:#231F20;
+  --ink-primary:#231F20; --ink-secondary:#5A5356; --ink-inverse:#FFFFFF;
+  --accent:#EE1D48; --accent-fill:#E3103F; --accent-text:#C4103A;
+  --hairline:#E8E4E5; --border-control:#949094;
+  --s3:12px; --s4:16px; --s5:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#3A3A3C;font-family:Roboto,Arial,sans-serif;padding:32px 16px;display:flex;gap:32px;flex-wrap:wrap;justify-content:center;color:#fff}
+.case{width:320px}
+.case h4{font:500 13px/1.4 Roboto,Arial,sans-serif;color:#C8C6C4;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.phone{width:320px;min-height:568px;background:var(--surface-base);overflow:hidden;position:relative;border-radius:4px}
+.hdr{min-height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--s4);border-bottom:1px solid var(--hairline)}
+.logo{font:600 22px/1 "Arial Narrow",Arial,sans-serif;letter-spacing:.02em;color:var(--accent)}
+.hdr-right{display:flex;align-items:center;gap:var(--s3)}
+.tel{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink-primary);font-size:20px;text-decoration:none}
+.hero{padding:var(--s5) var(--s4) var(--s4)}
+.addr{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary);margin-bottom:var(--s4)}
+h1{font:600 32px/36px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.01em;color:var(--ink-primary)}
+h1 em{font-style:normal;color:var(--accent)}
+.sub{font:400 16px/24px Roboto,Arial,sans-serif;color:var(--ink-primary);margin-top:var(--s3)}
+.cta{display:block;width:100%;min-height:56px;background:var(--accent-fill);color:var(--ink-inverse);border:0;border-radius:8px;
+  font:600 20px/24px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin-top:var(--s5);cursor:pointer;padding:var(--s4)}
+.note{font:400 14px/20px Roboto,Arial,sans-serif;color:var(--ink-secondary);margin-top:var(--s3);text-align:center}
+.photo{margin-top:var(--s4);min-height:150px;background:var(--surface-muted);border-top:1px solid var(--hairline);
+  display:flex;align-items:center;justify-content:center;font:400 13px/18px Roboto,Arial,sans-serif;color:var(--ink-secondary)}
+.stuck .hdr{position:sticky;top:0;background:var(--surface-base);box-shadow:0 1px 3px rgba(35,31,32,.12);z-index:2}
+.hdr-cta{min-height:44px;padding:0 var(--s3);background:var(--accent-fill);color:#fff;border:0;border-radius:8px;
+  font:600 16px/20px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em;cursor:pointer}
+.scrolled{padding:var(--s5) var(--s4)}
+.scrolled h2{font:600 24px/28px "Arial Narrow",Arial,sans-serif;text-transform:uppercase;color:var(--ink-primary);margin-bottom:var(--s4)}
+.rail{display:flex;gap:var(--s3);overflow:hidden}
+.card{flex:0 0 240px;height:172px;background:var(--surface-muted);border:1px solid var(--hairline);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font:400 13px Roboto,Arial,sans-serif;color:var(--ink-secondary)}
+.dots{display:flex;gap:6px;margin-top:var(--s3)}
+.dot{width:6px;height:6px;border-radius:9999px;background:var(--border-control)}
+.dot.on{background:var(--accent-fill);width:18px}
+.legend{width:100%;max-width:688px;font:400 13px/20px Roboto,Arial,sans-serif;color:#C8C6C4}
+.legend b{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="case">
+  <h4>Покой · 320×568 · шапка не прилипла</h4>
+  <div class="phone">
+    <header class="hdr">
+      <span class="logo" role="img" aria-label="Натриум, кроссфит-бокс">NATRIUM</span>
+      <div class="hdr-right"><a class="tel" href="tel:+74956460765" aria-label="Позвонить в клуб">☎</a></div>
+    </header>
+    <main class="hero">
+      <p class="addr">Москва, ул. Дубининская, 68с2 · 7 мин от Павелецкой</p>
+      <h1>Погрузись<br>в кроссфит<br><em>с любого уровня</em></h1>
+      <p class="sub">Тренеры разберут технику и подстрахуют. Первая консультация — бесплатно.</p>
+      <button class="cta">Бесплатная консультация</button>
+      <p class="note">Перезвоним в течение 15 минут</p>
+    </main>
+    <div class="photo">фото зала · WebP · не в lazy load</div>
+  </div>
+</div>
+
+<div class="case stuck">
+  <h4>После скролла · шапка прилипла с CTA</h4>
+  <div class="phone">
+    <header class="hdr">
+      <span class="logo" role="img" aria-label="Натриум, кроссфит-бокс">NATRIUM</span>
+      <div class="hdr-right">
+        <a class="tel" href="tel:+74956460765" aria-label="Позвонить в клуб">☎</a>
+        <button class="hdr-cta">Записаться</button>
+      </div>
+    </header>
+    <main class="scrolled">
+      <h2>Атмосфера</h2>
+      <div class="rail">
+        <div class="card">фото 1 из 7</div>
+        <div class="card">фото 2 →</div>
+      </div>
+      <div class="dots" aria-hidden="true"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    </main>
+  </div>
+</div>
+
+<p class="legend"><b>Что проверяет мок.</b> Первый экран целиком влезает в 320×568 при базовом размере шрифта: логотип, адрес, оффер, кнопка и обещание звонка. Заголовок капсом Oswald держит три строки в 288px рабочей ширины. Алый — только на заливке кнопки (<code>accent-fill</code>) и одном слове заголовка, где логотипный <code>accent</code> допустим: 32px — крупный текст без спора. Кнопка в шапке набрана 16px на <code>accent-fill</code> и имеет минимум 44px по высоте — проходит и AA, и порог области нажатия. Точки галереи скрыты от скринридера, позицию сообщает сама карточка. Все высоты — минимальные, при зуме блоки растут. Спины побеждают при любом расхождении с этим моком.</p>
+
+</body>
+</html>
