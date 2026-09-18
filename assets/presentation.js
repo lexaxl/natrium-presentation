@@ -49,7 +49,7 @@
   function run(name) {
     var d = doc();
     if (name === 'policy') {
-      frame.setAttribute('src', landing + 'policy/');
+      window.open('https://natriumfitness.ru/policy', '_blank', 'noopener,noreferrer');
       return;
     }
     var onLanding = d && d.querySelector('[data-hero]');
